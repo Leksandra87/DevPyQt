@@ -7,7 +7,7 @@ PySide6-uic path_to_form.ui -o path_to_form.py
 
 from PySide6 import QtWidgets
 
-from ui.form import Ui_MainWindow  # Импортируем класс формы
+from ui.My_test_form import Ui_MainWindow  # Импортируем класс формы
 
 
 class Window(QtWidgets.QMainWindow):  # наследуемся от того же класса, что и форма в QtDesigner
@@ -18,9 +18,9 @@ class Window(QtWidgets.QMainWindow):  # наследуемся от того ж�
         self.ui = Ui_MainWindow()
         self.ui.setupUi(self)
 
-        self.ui.Button_1.setText('Button_1')
-        self.ui.checkBox_4.setChecked(True)
-        print(self.ui.checkBox_4.isChecked())
+        # self.ui.Button_1.setText('Button_1')
+        # self.ui.checkBox_4.setChecked(True)
+        # print(self.ui.checkBox_4.isChecked())
 
 
 if __name__ == "__main__":
