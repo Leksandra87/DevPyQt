@@ -75,7 +75,7 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        self.lineEditName.setText(self.settings.value("Name", ""))
+        self.lineEditName.setText(self.settings.value("Name", "")) # если нет сохраненного значения - выведет пустую строку
         self.lineEditSurname.setText(self.settings.value("Surname", ""))
 
         data = self.settings.value("CheckState")
@@ -111,7 +111,7 @@ class Window(QtWidgets.QWidget):
         :param event: QtGui.QCloseEvent
         :return: None
         """
-
+# сохраняет значения перед закрытием окна, если нажат чекер
         if self.checkBox.isChecked():
             self.settings.setValue("Name", self.lineEditName.text())
             self.settings.setValue("Surname", self.lineEditSurname.text())
