@@ -7,12 +7,34 @@ from time import ctime
 from PySide6 import QtWidgets, QtGui, QtCore
 
 
-class Window(QtWidgets.QWidget):
+class Window(QtWidgets.QMainWindow):
 
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        self.initUi()
+        layout = QtWidgets.QHBoxLayout()
+        self.pp = QtWidgets.QPushButton('button')
+        self.pb = QtWidgets.QPushButton('next')
+        self.setMouseTracking(True)
+        layout.addWidget(self.pp)
+        layout.addWidget(self.pb)
+
+        centralWidget = QtWidgets.QWidget()
+        centralWidget.setLayout(layout)
+
+        self.setCentralWidget(centralWidget)
+
+        #self.initUi()
+
+    def eventFilter(self, watched: QtCore.QObject, event: QtCore.QEvent) -> bool:
+        if watched == self.pp:
+            print(event.type())
+            if event.type() == QtCore.QEvent.Type.Leave:
+                print('Leave')
+            if event.type() == QtCore.QEvent.Type.Enter:
+                print('Enter')
+                
+        return super().eventFilter(watched, event)
 
     def initUi(self) -> None:
         """
