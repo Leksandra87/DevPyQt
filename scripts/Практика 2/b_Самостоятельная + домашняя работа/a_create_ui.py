@@ -6,7 +6,9 @@ class Window(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
 
-        # TODO Вызовите метод для инициализации интерфейса
+        self.initUi()
+
+        # Вызовите метод для инициализации интерфейса
 
     def initUi(self) -> None:
         """
@@ -15,14 +17,14 @@ class Window(QtWidgets.QWidget):
         :return: None
         """
 
-        labelLogin = ...  # TODO Создайте виджет QLabel с текстом "Логин"
-        labelRegistration = ...  # TODO Создайте виджет QLabel с текстом "Регистрация"
+        labelLogin = QtWidgets.QLabel("Логин")  #  Создайте виджет QLabel с текстом "Логин"
+        labelRegistration = QtWidgets.QLabel("Регистрация")  #  Создайте виджет QLabel с текстом "Регистрация"
 
-        self.lineEditLogin = ...  # TODO создайте виджет QLineEdit
-        self.lineEditLogin  # TODO добавьте placeholderText "Введите логин" с помощью метода .setPlaceholderText()
-        self.lineEditPassword = ...  # TODO создайте виджет QLineEdit
-        self.lineEditPassword  # TODO добавьте placeholderText "Введите пароль"
-        self.lineEditPassword  # TODO установите ограничение видимости вводимых знаков с помощью метода .setEchoMode()
+        self.lineEditLogin = QtWidgets.QLineEdit()  #  создайте виджет QLineEdit
+        self.lineEditLogin.setPlaceholderText("Введите логин")  #  добавьте placeholderText "Введите логин" с помощью метода .setPlaceholderText()
+        self.lineEditPassword = QtWidgets.QLineEdit()  #  создайте виджет QLineEdit
+        self.lineEditPassword.setPlaceholderText("Введите пароль")  #  добавьте placeholderText "Введите пароль"
+        self.lineEditPassword.setEchoMode()  #  установите ограничение видимости вводимых знаков с помощью метода .setEchoMode()
 
         self.pushButtonLogin = ...  # TODO создайте виджет QPushButton
         self.pushButtonLogin  # TODO установите текст "Войти" с помощью метода setText()

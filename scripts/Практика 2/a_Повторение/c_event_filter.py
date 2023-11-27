@@ -8,13 +8,43 @@
 (красивая - красным, кнопка - синим)
 """
 
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtCore, QtGui
 
 
 class Window(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.label = None
+
+        self.initUi()
+
+    def initUi(self) -> None:
+        """
+        Доинициализация Ui
+
+        :return: None
+        """
+
+        self.setFixedSize(300, 100)
+        self.setMouseTracking(True)
+
+        self.label = QtWidgets.QLabel("Красивая кнопка")
+        self.label.setAlignment(QtCore.Qt.AlignmentFlag.AlignCenter)
+
+        layout = QtWidgets.QVBoxLayout()
+        layout.addWidget(self.label)
+        self.setLayout(layout)
+
+    def mouseMoveEvent(self, event: QtGui.QMouseEvent) -> None:
+        """
+        Обработка событий движения мыши
+
+        :param event: QtGui.QMouseEvent
+        :return: None
+        """
+
+        ...
 
 
 if __name__ == "__main__":

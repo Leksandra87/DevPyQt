@@ -49,7 +49,7 @@ class MainWindow(QtWidgets.QWidget):
 
         self.pb.clicked.connect(self.open_child_window)
 
-        # self.child_window.send_data.connect(lambda x: print(f"{ctime()} Main {x}"))
+        self.child_window.send_data.connect(lambda x: print(f"{ctime()} Main {x}"))
 
     def open_child_window(self) -> None:
         """
