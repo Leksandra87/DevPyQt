@@ -37,6 +37,7 @@ class Window(QtWidgets.QWidget):
         self.lineEdit.setPlaceholderText("Введите текст")
 
         self.pushButtonLineEdit = QtWidgets.QPushButton("Получить данные")
+        self.pushButtonLineEdit.setStyleSheet("background-color: rgb(0, 170, 127), color: rgb(170, 0, 0), border-radius: 30, border-color: rgb(85, 0, 0)")
 
         layoutLineEdit = QtWidgets.QHBoxLayout()
         layoutLineEdit.addWidget(self.lineEdit)

@@ -39,7 +39,7 @@ class Window(QtWidgets.QWidget):
         """
 
         self.timeTimer = QtCore.QTimer()
-        self.timeTimer.setInterval(1000)
+        self.timeTimer.setInterval(1000)  # раз в секунду
         self.timeTimer.start()
 
     def initSignals(self) -> None:
@@ -61,6 +61,7 @@ class Window(QtWidgets.QWidget):
         time = QtCore.QDateTime.currentDateTime()
         timeDisplay = time.toString('yyyy-MM-dd hh:mm:ss dddd')
         self.labelTime.setText(timeDisplay)
+        # если увеличить время выполнения данной функции, то все сломается
 
 
 if __name__ == '__main__':
