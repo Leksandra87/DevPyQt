@@ -18,13 +18,46 @@
    в него соответствующие значения
 """
 
-from PySide6 import QtWidgets
+from PySide6 import QtWidgets, QtCore, QtGui
+from d_from_ui import Ui_Form
 
 
 class Window(QtWidgets.QWidget):
 
     def __init__(self, parent=None):
         super().__init__(parent)
+
+        self.ui = Ui_Form()
+        self.ui.setupUi(self)
+        # self.ui.comboBox.editTextChanged
+
+
+        self.init_signals()
+
+    def init_signals(self) -> None:
+        """
+        Инициализация сигналов
+
+        :return: None
+        """
+        self.ui.dial.valueChanged.connect(lambda: self.ui.lcdNumber.display(self.ui.dial.value()))
+        self.ui.dial.valueChanged.connect(lambda: self.ui.horizontalSlider.setValue(self.ui.dial.value()))
+        self.ui.horizontalSlider.valueChanged.connect(lambda: self.ui.lcdNumber.display(self.ui.horizontalSlider.value()))
+        self.ui.horizontalSlider.valueChanged.connect(lambda: self.ui.dial.setValue(self.ui.horizontalSlider.value()))
+
+        ...
+
+    def keyPressEvent(self, event: QtGui.QKeyEvent) -> None:
+        """
+        Вращение диала клавишами "+" и "-"
+        """
+
+        if event.key() == 43:
+            self.ui.dial.setValue(self.ui.dial.value() + 1)
+            print(self.ui.dial.value())
+        if event.key() == 45:
+            self.ui.dial.setValue(self.ui.dial.value() - 1)
+            print(self.ui.dial.value())
 
 
 if __name__ == "__main__":
