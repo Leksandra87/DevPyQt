@@ -20,7 +20,7 @@
     * При изменении размера окна выводить его новый размер
 """
 
-from PySide6 import QtWidgets, QtCore
+from PySide6 import QtWidgets, QtCore, QtGui
 from c_from_ui import Ui_Form
 
 
@@ -31,6 +31,8 @@ class Window(QtWidgets.QWidget):
 
         self.ui = Ui_Form()
         self.ui.setupUi(self)
+        self.ui.spinBoxX.setMaximum(1999)
+        self.ui.spinBoxY.setMaximum(1999)
 
         self.init_signals()
 
@@ -44,8 +46,9 @@ class Window(QtWidgets.QWidget):
 
         self.ui.pushButtonLT.clicked.connect(self.move_to_lt)
         self.ui.pushButtonRT.clicked.connect(self.move_to_rt)
-        self.ui.pushButtonLB.clicked.connect(lambda: self.setGeometry(0, 590, 700, 450))
-        self.ui.pushButtonRB.clicked.connect(lambda: self.setGeometry(1220, 590, 700, 450))
+        self.ui.pushButtonLB.clicked.connect(self.move_to_lb)
+        self.ui.pushButtonRB.clicked.connect(self.move_to_rb)
+        self.ui.pushButtonCenter.clicked.connect(self.move_to_center)
 
         self.ui.pushButtonGetData.clicked.connect(self.get_data)
 
@@ -66,6 +69,34 @@ class Window(QtWidgets.QWidget):
         x = screen[0] - size[0]
         self.move(x, 0)
 
+    def move_to_lb(self) -> None:
+        """
+        Перемещение окна в левый нижний угол
+        """
+        size = self.rect().size().toTuple()
+        screen = self.screen().availableSize().toTuple()
+        y = screen[1] - size[1] - 40
+        self.move(0, y)
+
+    def move_to_rb(self) -> None:
+        """
+        Перемещение окна в правый нижний угол
+        """
+        screen = self.screen().availableSize().toTuple()
+        size = self.rect().size().toTuple()
+        x = screen[0] - size[0]
+        y = screen[1] - size[1] - 40
+        self.move(x, y)
+
+    def move_to_center(self) -> None:
+        """
+        Перемещение окна в центр
+        """
+        screen = self.screen().availableSize().toTuple()
+        size = self.rect().size().toTuple()
+        x = screen[0] // 2 - size[0] // 2
+        y = screen[1] // 2 - size[1] // 2
+        self.move(x, y)
 
     def get_data(self) -> None:
         """
@@ -102,6 +133,31 @@ class Window(QtWidgets.QWidget):
         x = int(self.ui.spinBoxX.value())
         y = int(self.ui.spinBoxY.value())
         self.move(x, y)
+
+    def moveEvent(self, event: QtGui.QMoveEvent) -> None:
+        """
+        Событие изменения положения окна
+
+        :param event: QtGui.QMoveEvent
+        :return: None
+        """
+
+        old = event.oldPos().toTuple()
+        new = event.pos().toTuple()
+        print(f'{QtCore.QDateTime.currentDateTime().toString("dd.MM.yyyy HH:mm:ss")}\n'
+              f'Previous coordinates: {old}'
+              f'\nCurrent coordinates: {new}')
+
+    def resizeEvent(self, event: QtGui.QResizeEvent) -> None:
+        """
+        Событие изменения размера окна
+
+        :param event: QtGui.QResizeEvent
+        :return: None
+        """
+
+        print(f'{QtCore.QDateTime.currentDateTime().toString("dd.MM.yyyy HH:mm:ss")} '
+              f'Window size: {event.size().toTuple()}')
 
 
 if __name__ == "__main__":
