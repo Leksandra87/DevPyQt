@@ -44,7 +44,7 @@ class Window(QtWidgets.QWidget):
         self.ui.horizontalSlider.valueChanged.connect(
             lambda: self.ui.lcdNumber.display(self.ui.horizontalSlider.value()))
         self.ui.horizontalSlider.valueChanged.connect(lambda: self.ui.dial.setValue(self.ui.horizontalSlider.value()))
-        # self.ui.comboBox.currentTextChanged.connect(lambda: self.ui.dial.)
+        self.ui.comboBox.currentTextChanged.connect(self.set_lcd_mode)
 
         ...
 
@@ -59,6 +59,21 @@ class Window(QtWidgets.QWidget):
         if event.key() == 45:
             self.ui.dial.setValue(self.ui.dial.value() - 1)
             print(self.ui.dial.value())
+
+    def set_lcd_mode(self) -> None:
+        """
+        Изменение системы счисления для QLCDNumber
+        """
+        text = self.ui.comboBox.currentText()
+        if text == 'dec':
+            self.ui.lcdNumber.setDecMode()
+        elif text == 'bin':
+            self.ui.lcdNumber.setBinMode()
+        elif text == 'hex':
+            self.ui.lcdNumber.setHexMode()
+        elif text == 'oct':
+            self.ui.lcdNumber.setOctMode()
+        # print(text)
 
 
 if __name__ == "__main__":
