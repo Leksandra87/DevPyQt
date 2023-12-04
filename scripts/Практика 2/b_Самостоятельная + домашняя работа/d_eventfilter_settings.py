@@ -44,6 +44,7 @@ class Window(QtWidgets.QWidget):
         self.ui.horizontalSlider.valueChanged.connect(
             lambda: self.ui.lcdNumber.display(self.ui.horizontalSlider.value()))
         self.ui.horizontalSlider.valueChanged.connect(lambda: self.ui.dial.setValue(self.ui.horizontalSlider.value()))
+        # self.ui.comboBox.currentTextChanged.connect(lambda: self.ui.dial.)
 
         ...
 
