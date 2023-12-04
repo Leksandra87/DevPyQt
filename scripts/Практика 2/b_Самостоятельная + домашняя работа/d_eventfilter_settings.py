@@ -29,8 +29,7 @@ class Window(QtWidgets.QWidget):
 
         self.ui = Ui_Form()
         self.ui.setupUi(self)
-        # self.ui.comboBox.editTextChanged
-
+        self.ui.comboBox.addItems(['dec', 'bin', 'hex', 'oct'])
 
         self.init_signals()
 
@@ -42,7 +41,8 @@ class Window(QtWidgets.QWidget):
         """
         self.ui.dial.valueChanged.connect(lambda: self.ui.lcdNumber.display(self.ui.dial.value()))
         self.ui.dial.valueChanged.connect(lambda: self.ui.horizontalSlider.setValue(self.ui.dial.value()))
-        self.ui.horizontalSlider.valueChanged.connect(lambda: self.ui.lcdNumber.display(self.ui.horizontalSlider.value()))
+        self.ui.horizontalSlider.valueChanged.connect(
+            lambda: self.ui.lcdNumber.display(self.ui.horizontalSlider.value()))
         self.ui.horizontalSlider.valueChanged.connect(lambda: self.ui.dial.setValue(self.ui.horizontalSlider.value()))
 
         ...
