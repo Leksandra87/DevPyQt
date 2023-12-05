@@ -12,7 +12,8 @@ class Widget(QtWidgets.QWidget):
         painter = QtGui.QPainter(self)
 
         pen = QtGui.QPen()
-        pen.setColor(QtCore.Qt.GlobalColor.red)
+        pen.setColor(QtCore.Qt.GlobalColor.green)
+        pen.setWidth(10)
         # pen.setBrush(QtCore.Qt.BrushStyle.Dense4Pattern)
 
         # TODO не отрабатывает
@@ -26,12 +27,12 @@ class Widget(QtWidgets.QWidget):
         painter.drawRect(self.x1, self.y1, w, h)
 
     def mouseMoveEvent(self, event: QtGui.QMouseEvent) -> None:
-        self.x2, self.y2 = event.x(), event.y()
+        self.x2, self.y2 = event.position().x(), event.position().y()
         self.repaint()
 
     def mousePressEvent(self, event: QtGui.QMouseEvent) -> None:
-        self.x1, self.y1 = event.x(), event.y()
-        self.x2, self.y2 = event.x(), event.y()
+        self.x1, self.y1 = event.position().x(), event.position().y()
+        self.x2, self.y2 = event.position().x(), event.position().y()
         self.repaint()
 
 
