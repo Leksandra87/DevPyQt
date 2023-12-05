@@ -38,7 +38,7 @@ class Window(QtWidgets.QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
         self.initUi()
-        self.initThread()
+        self.initThread() # обязательно выше инита
         self.initSignals()
 
     def initUi(self):
